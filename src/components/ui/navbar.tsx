@@ -13,8 +13,9 @@ import NextLink from "next/link";
 import clsx from "clsx";
 
 import { siteConfig } from "@/src/config/site";
-import { ThemeSwitch } from "@/src/components/theme-switch";
 import { Logo } from "@/src/components/icons";
+import NavbarDropdown from "./NavbarDropdown";
+import { ThemeSwitch } from "../theme-switch";
 
 export const Navbar = () => {
   return (
@@ -51,6 +52,9 @@ export const Navbar = () => {
         <NavbarItem className="hidden sm:flex gap-2">
           <ThemeSwitch />
         </NavbarItem>
+        <NavbarItem className="hidden sm:flex gap-2">
+          <NavbarDropdown />
+        </NavbarItem>
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
@@ -67,8 +71,8 @@ export const Navbar = () => {
                   index === 2
                     ? "primary"
                     : index === siteConfig.navMenuItems.length - 1
-                      ? "danger"
-                      : "foreground"
+                    ? "danger"
+                    : "foreground"
                 }
                 href="#"
                 size="lg"
