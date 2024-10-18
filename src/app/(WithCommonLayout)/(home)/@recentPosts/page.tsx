@@ -8,7 +8,7 @@ import Card from "@/src/components/ui/Card";
 
 export default async function RecentPosts() {
   const { data: posts } = await getRecentPosts();
-  console.log(posts);
+  // console.log(posts);
 
   return (
     <Container>
