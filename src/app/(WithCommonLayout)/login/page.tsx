@@ -1,6 +1,6 @@
 "use client";
-import FXForm from "@/src/components/form/FxForm";
-import FXInput from "@/src/components/form/FxInput";
+import FXForm from "@/src/components/form/FXForm";
+import FXInput from "@/src/components/form/FXInput";
 import Loading from "@/src/components/ui/Loading";
 import { useUser } from "@/src/context/user.provider";
 import { useLogin } from "@/src/hooks/auth.hook";

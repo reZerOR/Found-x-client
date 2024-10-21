@@ -1,6 +1,6 @@
 "use client";
-import FXForm from "@/src/components/form/FxForm";
-import FXInput from "@/src/components/form/FxInput";
+import FXForm from "@/src/components/form/FXForm";
+import FXInput from "@/src/components/form/FXInput";
 import { useUserRegistration } from "@/src/hooks/auth.hook";
 import registerValidationSchema from "@/src/schemas/register.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
