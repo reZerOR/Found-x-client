@@ -1,5 +1,5 @@
-import Container from "@/src/components/ui/Container";
-import Post from "@/src/components/ui/Post";
+import Container from "@/src/components/UI/Container";
+import Post from "@/src/components/UI/Post";
 import axiosInstance from "@/src/lib/AxiosInstance";
 import { IPost } from "@/src/types";
 import { cookies } from "next/headers";

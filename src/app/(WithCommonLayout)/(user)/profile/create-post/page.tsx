@@ -20,7 +20,7 @@ import { AddIcon, TrashIcon, Upload } from "@/src/assets/icons";
 import { useUser } from "@/src/context/user.provider";
 
 import { useRouter } from "next/navigation";
-import Loading from "@/src/components/ui/Loading";
+import Loading from "@/src/components/UI/Loading";
 import dateToISO from "@/src/utils/dateToISO";
 import FXInput from "@/src/components/form/FXInput";
 import { useCreatePost } from "@/src/hooks/post.hook";

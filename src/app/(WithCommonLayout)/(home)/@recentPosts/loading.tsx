@@ -2,9 +2,9 @@ import { Button } from "@nextui-org/button";
 import Link from "next/link";
 
 import { IPost } from "@/src/types";
-import Container from "@/src/components/ui/Container";
+import Container from "@/src/components/UI/Container";
 
-import CardSkeleton from "@/src/components/ui/CardSkeleton";
+import CardSkeleton from "@/src/components/UI/CardSkeleton";
 
 export default async function RecentPosts() {
 

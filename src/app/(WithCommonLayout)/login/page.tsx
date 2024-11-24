@@ -1,7 +1,7 @@
 "use client";
 import FXForm from "@/src/components/form/FXForm";
 import FXInput from "@/src/components/form/FXInput";
-import Loading from "@/src/components/ui/Loading";
+import Loading from "@/src/components/UI/Loading";
 import { useUser } from "@/src/context/user.provider";
 import { useLogin } from "@/src/hooks/auth.hook";
 import loginValidationSchema from "@/src/schemas/logoin.schema";

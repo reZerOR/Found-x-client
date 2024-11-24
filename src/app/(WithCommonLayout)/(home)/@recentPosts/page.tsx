@@ -3,8 +3,8 @@ import Link from "next/link";
 import { getRecentPosts } from "@/src/services/RecentPosts";
 
 import { IPost } from "@/src/types";
-import Container from "@/src/components/ui/Container";
-import Card from "@/src/components/ui/Card";
+import Container from "@/src/components/UI/Container";
+import Card from "@/src/components/UI/Card";
 
 export default async function RecentPosts() {
   const { data: posts } = await getRecentPosts();
