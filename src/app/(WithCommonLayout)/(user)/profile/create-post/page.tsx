@@ -11,20 +11,19 @@ import {
 } from "react-hook-form";
 import { allDistict } from "@bangladeshi/bangladesh-address";
 import { ChangeEvent, useState } from "react";
-
-import FXDatePicker from "@/src/components/form/FXDatePicker";
-import FXSelect from "@/src/components/form/FXSelect";
-
-import FXTextarea from "@/src/components/form/FXTextArea";
-import { AddIcon, TrashIcon, Upload } from "@/src/assets/icons";
-import { useUser } from "@/src/context/user.provider";
-
 import { useRouter } from "next/navigation";
-import Loading from "@/src/components/UI/Loading";
-import dateToISO from "@/src/utils/dateToISO";
+
 import FXInput from "@/src/components/form/FXInput";
-import { useCreatePost } from "@/src/hooks/post.hook";
+import FXDatePicker from "@/src/components/form/FXDatePicker";
+import dateToISO from "@/src/utils/dateToISO";
+import FXSelect from "@/src/components/form/FXSelect";
 import { useGetCategories } from "@/src/hooks/categoreis.hook";
+import FXTextarea from "@/src/components/form/FXTextArea";
+import { AddIcon, TrashIcon } from "@/src/assets/icons";
+import { useUser } from "@/src/context/user.provider";
+import { useCreatePost } from "@/src/hooks/post.hook";
+import Loading from "@/src/components/UI/Loading";
+import generateDescription from "@/src/services/ImageDescription";
 
 const cityOptions = allDistict()
   .sort()
@@ -38,6 +37,8 @@ const cityOptions = allDistict()
 export default function CreatePost() {
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
   const [imagePreviews, setImagePreviews] = useState<string[] | []>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const router = useRouter();
 
@@ -85,8 +86,6 @@ export default function CreatePost() {
       user: user!._id,
     };
 
-    console.log(postData);
-
     formData.append("data", JSON.stringify(postData));
 
     for (let image of imageFiles) {
@@ -113,6 +112,23 @@ export default function CreatePost() {
       };
 
       reader.readAsDataURL(file);
+    }
+  };
+
+  const handleDescriptionGeneration = async () => {
+    setIsLoading(true);
+    try {
+      const response = await generateDescription(
+        imagePreviews[0],
+        "write a found note and add location where you found that related to image starts with 'Found this...' dont give options just give one sentence"
+      );
+
+      methods.setValue("description", response);
+      setIsLoading(false);
+    } catch (error: any) {
+      console.error(error);
+      setError(error.message);
+      setIsLoading(false);
     }
   };
 
@@ -155,10 +171,9 @@ export default function CreatePost() {
               </div>
               <div className="min-w-fit flex-1">
                 <label
-                  className="flex h-14 w-full gap-2 cursor-pointer items-center justify-center rounded-xl border-2 border-default-200 text-default-500 shadow-sm transition-all duration-100 hover:border-default-400"
+                  className="flex h-14 w-full cursor-pointer items-center justify-center rounded-xl border-2 border-default-200 text-default-500 shadow-sm transition-all duration-100 hover:border-default-400"
                   htmlFor="image"
                 >
-                  <Upload />
                   Upload image
                 </label>
                 <input
@@ -192,6 +207,21 @@ export default function CreatePost() {
               <div className="min-w-fit flex-1">
                 <FXTextarea label="Description" name="description" />
               </div>
+            </div>
+
+            <div className="flex justify-end gap-5">
+              {methods.getValues("description") && (
+                <Button onClick={() => methods.resetField("description")}>
+                  Clear
+                </Button>
+              )}
+              <Button
+                isDisabled={imagePreviews.length > 0 ? false : true}
+                isLoading={isLoading}
+                onClick={() => handleDescriptionGeneration()}
+              >
+                {isLoading ? "Generating...." : "Generate with AI"}
+              </Button>
             </div>
 
             <Divider className="my-5" />
